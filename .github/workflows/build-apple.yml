@@ -1,0 +1,70 @@
+name: Compile Apple Releases (iOS & macOS)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: ./mobile
+        run: npm install
+
+      - name: Install CocoaPods
+        working-directory: ./mobile/ios
+        run: pod install
+
+      - name: Build iOS Release (IPA)
+        working-directory: ./mobile/ios
+        run: |
+          xcodebuild -workspace Sentinel.xcworkspace -scheme Sentinel -sdk iphoneos -configuration Release archive -archivePath $PWD/build/Sentinel.xcarchive
+          # Note: Real export requires PROVISIONING_PROFILE and CERTIFICATE secrets
+          # xcodebuild -exportArchive -archivePath $PWD/build/Sentinel.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $PWD/build
+
+      - name: Upload iOS Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: sentinel-ios-app
+          path: mobile/ios/build/
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: ./desktop
+        run: npm install
+
+      - name: Build macOS Release (Tauri)
+        working-directory: ./desktop
+        run: npm run tauri build
+
+      - name: Upload macOS Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: sentinel-macos-app
+          path: desktop/src-tauri/target/release/bundle/macos/
