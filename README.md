@@ -42,3 +42,11 @@ Upon pushing to `main`, cloud servers will automatically compile the architectur
 ## Installation
 Follow standard installation steps for this language.
 
+
+## 🐳 Docker Support
+
+Run the system seamlessly using Docker:
+
+```bash
+docker compose up --build
+```
