@@ -34,3 +34,11 @@ Upon pushing to `main`, cloud servers will automatically compile the architectur
 
 ---
 *Built with React Native, Tauri, Next.js, NestJS, and Python FastAPI.*
+
+
+## Prerequisites
+- Required environment and dependencies
+
+## Installation
+Follow standard installation steps for this language.
+
