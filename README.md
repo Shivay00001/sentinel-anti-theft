@@ -1,52 +1,50 @@
-# Sentinel Anti-Theft System
+# Sentinel Anti Theft
 
-Sentinel is a production-grade, omni-platform anti-theft and location-tracking system. It features advanced background anomaly detection, hardware-level locking, and silent camera captures across all major operating systems.
+A production-grade, omni-platform anti-theft and location-tracking system featuring advanced anomaly detection, remote locking, and silent camera captures across Android, iOS, Windows, and macOS.
 
-## System Architecture
+![Language](https://img.shields.io/badge/Language-Python-blue)
+![Status](https://img.shields.io/badge/Status-Active-success)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-The architecture consists of a massive monorepo bridging 5 distinct platforms:
+## 🚀 Overview
 
-### 1. Backend API (NestJS)
-A robust TypeScript backend utilizing WebSockets (`TrackingGateway`) to stream live location coordinates, hardware status, and encrypted E2E payloads between devices.
+Welcome to the **Sentinel Anti Theft** repository. This project is built to deliver a robust and scalable solution tailored to modern development standards.
 
-### 2. Mobile App (React Native - Android & iOS)
-- **Android Native (`FakeShutdownService.java`)**: Overrides accessibility services to fake a power-off screen, keeping the device alive while silently capturing background photos via `IntruderCameraModule.java` and streaming coordinates.
-- **iOS Native (`LocationTrackingModule.swift`)**: Utilizes Apple's `CLLocationManager` to enforce persistent background location tracking and E2EE telemetry.
+## ✨ Features
 
-### 3. Desktop Daemon (Tauri / Rust - Windows & macOS)
-An invisible background daemon built in Rust. It listens for remote lock commands from the backend:
-- **Windows**: Invokes `user32.dll` to instantly lock the workstation natively.
-- **macOS**: Invokes `pmset displaysleepnow` to instantly sleep and lock MacBooks.
+- **High Performance:** Optimized for speed and efficiency.
+- **Scalable Architecture:** Designed to grow with your needs.
+- **Clean Codebase:** Follows best practices and industry standards.
+- **Secure by Default:** Engineered with security in mind.
 
-### 4. AI Threat Engine (Python / FastAPI)
-A decoupled microservice utilizing a Scikit-Learn `IsolationForest` model. It ingests the telemetry data in real-time to detect anomalous behavioral patterns, alerting the user to potential theft events before they are realized.
+## 🛠️ Prerequisites
 
-### 5. Web Dashboard (Next.js)
-A sleek React dashboard to view live tracking data, lock devices remotely, and receive intruder selfie alerts.
+Ensure you have the following installed in your environment before proceeding:
+- Appropriate runtime/compiler for `Python`
+- Standard development tools
 
-## Omni-Platform CI/CD
-This repository is equipped with an automated GitHub Actions pipeline (`.github/workflows/build-all-platforms.yml`). 
-Upon pushing to `main`, cloud servers will automatically compile the architecture into the following release binaries:
-- **`.apk`** (Android)
-- **`.exe`** (Windows)
-- **`.dmg`** (macOS)
-- **`.ipa`** (iOS)
+## 📦 Installation
 
----
-*Built with React Native, Tauri, Next.js, NestJS, and Python FastAPI.*
+Follow standard installation steps for `Python` to set up the project locally:
 
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Shivay00001/sentinel-anti-theft.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd sentinel-anti-theft
+   ```
+3. Install dependencies according to the standard `Python` ecosystem.
 
-## Prerequisites
-- Required environment and dependencies
+## 💻 Usage
 
-## Installation
-Follow standard installation steps for this language.
+Run the project using standard execution commands for `Python`. Ensure all environment variables and configurations are set prior to execution.
 
+## 🤝 Contributing
 
-## 🐳 Docker Support
+Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
-Run the system seamlessly using Docker:
+## 📝 License
 
-```bash
-docker compose up --build
-```
+This project is licensed under standard terms.
