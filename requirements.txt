@@ -1,1 +1,7 @@
-# Dependencies
+# Sentinel AI anomaly-detection service (ai-service/main.py)
+fastapi
+uvicorn
+pydantic
+pandas
+scikit-learn
+numpy
